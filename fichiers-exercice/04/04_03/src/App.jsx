@@ -6,19 +6,27 @@ import './App.css'
 const CountdownTimer = () => {
   const [time, setTime] = useState(10);
   const [color, setColor] = useState('text-dark');
+  const [isVisible, setVisible] = useState(false)
 
 
   const start = () => {
     if (time > 0) {
       const timer = setInterval(() => {
         setTime((prevTime) => prevTime - 1);
-        setColor(time < 0 ? 'text-danger' : 'text-dark')
       }, 1000);
       return () => clearInterval(timer);
     }
   }
   const increment = () => setTime((prevTime) => prevTime + 1);
   const decrement = () => setTime((prevTime) => prevTime - 1);
+
+  useEffect(() => {
+setColor(time < 0 ? 'text-danger' : 'text-dark')
+   }, [time])
+
+   useEffect(() => {
+    setVisible(time < 0)
+   }, [time])  
 
   return (
     <div className="text-center">
@@ -34,6 +42,8 @@ const CountdownTimer = () => {
           +
         </button>
       </div>
+      {/* ici on gére la condition d'affichage en fonction d'un état */}
+     {isVisible && <p className="text-danger">Time's Up!</p>}
     </div>
   );
 };
