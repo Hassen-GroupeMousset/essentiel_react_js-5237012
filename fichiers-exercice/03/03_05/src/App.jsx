@@ -18,6 +18,8 @@ function Header() {
 }
 function CountdownTimer() {
   const [time, setTime] = useState(10);
+
+  //Start counter
   const start = () => {
     if (time > 0) {
       const timer = setInterval(() => {
@@ -27,10 +29,15 @@ function CountdownTimer() {
     }
   }
 
+  //Reset counter to 0
+  const reset = () => setTime(0)
+
+
   return (
     <>
-      <p>{time} seconds</p>
+      <p><span className={time < 0 ?'text-danger':'text-dark'}>{time}</span> seconds</p>
       <button className="btn btn-outline-secondary" onClick={start}>Go!</button>
+      <button className="btn btn-outline-secondary" onClick={reset}>Reset!</button>
     </>
   );
 }
