@@ -6,6 +6,7 @@ import './App.css'
 const CountdownTimer = () => {
   const [time, setTime] = useState(10);
 
+  //start
   const start = () => {
     if (time > 0) {
       const timer = setInterval(() => {
