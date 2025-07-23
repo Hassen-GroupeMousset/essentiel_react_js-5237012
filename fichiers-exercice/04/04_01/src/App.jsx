@@ -14,17 +14,19 @@ const CountdownTimer = () => {
       return () => clearInterval(timer);
     }
   }
+  const increment = () => setTime((prevTime) => prevTime + 1);
+  const decrement = () =>setTime((prevTime) => prevTime - 1);
   return (
     <div className="text-center">
       <h4>{time} seconds</h4>
       <div className="btn-group mt-3">
-        <button className="btn btn-danger" onClick={() => { }}>
+        <button className="btn btn-danger" onClick={decrement}>
           -
         </button>
         <button className="btn btn-secondary" onClick={start}>
           Go!
         </button>
-        <button className="btn btn-success" onClick={() => { }}>
+        <button className="btn btn-success" onClick={increment}>
           +
         </button>
       </div>
