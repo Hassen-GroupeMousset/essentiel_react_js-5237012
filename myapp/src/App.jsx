@@ -4,11 +4,9 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(2)
-
-  return (
-    <>
-      <div>
+  function Header(){
+    return(
+        <div>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
@@ -16,8 +14,19 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Mon Premier Projet React</h1>
-      <div className="card">
+    )
+  }
+   
+  function Title(){
+    return (
+        <h1>Mon Premier Projet React</h1>
+    )
+  }
+
+  function Counter(){
+    const [count, setCount] = useState(2)
+    return(
+        <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
@@ -25,9 +34,22 @@ function App() {
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
+    ) 
+  } 
+
+  function Footer({content}){
+     <p className="read-the-docs">
+       {content}
       </p>
+  }
+
+  return (
+    <>
+      <Header />
+      <Title />
+      <Counter />
+      <Footer content = " Click on the Vite and React logos to learn more"/>
+     
     </>
   )
 }
