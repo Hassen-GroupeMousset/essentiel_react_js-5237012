@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, useCallback } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 
@@ -19,9 +19,20 @@ const CountdownTimer = () => {
   const increment = () => setTime((prevTime) => prevTime + 1);
   const decrement = () => setTime((prevTime) => prevTime - 1);
 
+  // const changeColor = () => {
+  //   console.log('ChangeColor')
+  //   setColor(time < 0 ? 'text-danger': 'text-dark')
+  // }
+
+  //utilisation de useCallback
+ const changeColor =useCallback(() => {
+    console.log('ChangeColor')
+    setColor(time < 0 ? 'text-danger': 'text-dark')
+  },[setColor,time]) 
+
   useEffect(() => {
     // side effect
-    setColor(time < 0 ? 'text-danger' : 'text-dark')
+   changeColor()
   }, [time])
 
   // useEffect(() => {
