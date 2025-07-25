@@ -6,6 +6,7 @@ import './App.css'
 const CountdownTimer = () => {
   const [time, setTime] = useState(10);
   const [color, setColor] = useState('text-dark');
+  //const [isVisible, setVisible] = useState(false)
 
   const start = () => {
     if (time > 0) {
@@ -28,7 +29,7 @@ const CountdownTimer = () => {
   //   setVisible(time < 0)
   // }, [time])
 
-  const isVisible = useMemo(() => time < 0, [time])
+ const isVisible = useMemo(() => time < 0, [time])
   return (
     <div className="text-center">
       <h4><span className={color}>{time} </span>seconds</h4>
