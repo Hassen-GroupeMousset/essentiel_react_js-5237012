@@ -21,26 +21,54 @@ function TodoApp() {
     return saved ? JSON.parse(saved) : [];
   });
   const [newTodo, setNewTodo] = useState("");
-  const [visibleTodos, setVisibleTodos] = useState(todos)
+  //const [visibleTodos, setVisibleTodos] = useState(todos)
   const [showCompleted, setShowCompleted] = useState(true);
 
   // Add a new todo (memoized)
-  const addTodo = () => {
-    if (newTodo.trim() === "") return;
-    setTodos(prev => [...prev, { text: newTodo, completed: false }]);
-    setNewTodo("");
-  };
+  // const addTodo = () => {
+  //   if (newTodo.trim() === "") return;
+  //   setTodos(prev => [...prev, { text: newTodo, completed: false }]);
+  //   setNewTodo("");
+  // };
+const addTodo = useCallback(() => {
+  if (newTodo.trim() === "") return;
+  setTodos(prev => [...prev, { text: newTodo, completed: false }]);
+  setNewTodo("");
+}, [setTodos, newTodo]);
+  
+
 
   // Toggle completed status (memoized)
-  const toggleTodo = (index => {
+  // const toggleTodo = (index => {
+  //   setTodos(prev =>
+  //     prev.map((todo, i) =>
+  //       i === index ? { ...todo, completed: !todo.completed } : todo
+  //     )
+  //   );
+  // });
+
+    const toggleTodo = useCallback(index => {
     setTodos(prev =>
       prev.map((todo, i) =>
         i === index ? { ...todo, completed: !todo.completed } : todo
       )
     );
-  });
+  },[setTodos])
+  
+  // useEffect(() =>{
+  //   const completed = !showCompleted ? todos : todos.filter(todo => todo.completed)
+  //   setVisibleTodos(completed)
+  // }, [showCompleted, todos])
 
   // Filtered todos (memoized)
+const visibleTodos = useMemo(() => {
+  return !showCompleted ? todos : todos.filter(todo => todo.completed)
+}, [showCompleted, todos])
+
+const todosCount = useMemo(() => {
+return todos.length > 0 ? todos.length + " todos" : ""
+}, [todos])
+
 
 
   // 2. définir useEffect pour sauvegarder en local
@@ -51,8 +79,7 @@ function TodoApp() {
 
   return (
     <div style={{ padding: "1rem", maxWidth: 500 }}>
-
-
+      <p className="mb--3">{todosCount}</p>
       <input
         type="text"
         value={newTodo}
